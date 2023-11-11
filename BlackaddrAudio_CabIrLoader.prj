@@ -1,0 +1,117 @@
+{
+  "efxFileVersion": "1.2.0",
+  "company": "Blackaddr Audio",
+  "effectName": "Cab IR Loader",
+  "effectVersion": "",
+  "coreVersion": "1.2.0",
+  "effectShortName": "CAB-IR",
+  "effectCategory": "Unspecified",
+  "effectDescription": "",
+  "numInputs": 2,
+  "numOutputs": 2,
+  "numControls": 6,
+  "effectFilename": "BlackaddrAudio_CabIrLoader.efx",
+  "libraryName": "BlackaddrAudio_CabIrLoader",
+  "cppClass": "BlackaddrAudio_CabIrLoader::CabIrLoader",
+  "cppInstBase": "_BlackaddrAudio_CabIrLoader",
+  "constructorParams": "",
+  "isSingleton": false,
+  "type": 1,
+  "controls": [
+    {
+      "name": "Bypass",
+      "shortName": "BYP",
+      "description": "Bypasses the effect when enabled",
+      "config": [
+        0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "userData": 1
+    },
+    {
+      "name": "Volume",
+      "shortName": "VOL",
+      "description": "Sets the effect output volume from -40dB to +10dB",
+      "config": [
+        3,
+        0.0,
+        10.0,
+        8.0,
+        0.1000000014901161
+      ],
+      "userData": 0
+    },
+    {
+      "name": "Cab Select",
+      "shortName": "CABSEL",
+      "description": "Select between the IRs loaded into Multiverse.",
+      "config": [
+        2,
+        1.0,
+        16.0,
+        1.0,
+        1.0
+      ],
+      "userData": 0
+    },
+    {
+      "name": "Hi Pass 1(Hz)",
+      "shortName": "HP1",
+      "description": "Hi-pass shelving filter to remove any excess bass muddiness.",
+      "config": [
+        3,
+        20.0,
+        200.0,
+        0.0,
+        1.0
+      ],
+      "userData": 0
+    },
+    {
+      "name": "Lo Pass 1 (KHz)",
+      "shortName": "LP1",
+      "description": "Low-pass shelving filter to remove any high frequency harshness.",
+      "config": [
+        3,
+        1.0,
+        16.0,
+        0.0,
+        0.1000000014901161
+      ],
+      "userData": 0
+    },
+    {
+      "name": "Delay 1 (ms)",
+      "shortName": "DELAY1",
+      "description": "Apply some delay to channel 1.",
+      "config": [
+        3,
+        0.0,
+        20.0,
+        0.0,
+        0.1000000014901161
+      ],
+      "userData": 0
+    }
+  ],
+  "projectFileVersion": "1.0.0",
+  "companyLogo": "gfx/BlackaddrLogo.png",
+  "pedalIcon": "gfx/CAB_Blackaddr.png",
+  "publicHeaderFiles": [
+    "inc/CabIrLoader.h"
+  ],
+  "privateSourceFiles": [
+    "src/CabIrLoaderBase.cpp",
+    "src/CabIrLoader.cpp",
+    "src/impulse_response_0.h"
+  ],
+  "modules": null,
+  "settings": {
+    "showModules": false,
+    "isSingleton": false,
+    "cppDefines": ""
+  }
+}
