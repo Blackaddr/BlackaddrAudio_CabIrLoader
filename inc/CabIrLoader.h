@@ -19,6 +19,12 @@ namespace BlackaddrAudio_CabIrLoader {
 //!s - START_USER_EFFECT_TYPES - put your effect types below this line before the matching END
 // constexpr size_t MAX_IR_PARTITIONS = 8;
 // constexpr size_t MAX_IR_SAMPLES = 128 * MAX_IR_PARTITIONS;
+typedef struct {
+    float alpha;
+    float yPrev;
+    float xPrev;
+} LowPassFilter_t;
+
 //!e - END_USER_EFFECT_TYPES
 
 class CabIrLoader : public AudioStream, public Aviate::AudioEffectWrapper {
@@ -34,6 +40,7 @@ public:
         HiPass1Hz_e = 3,
         LoPass1KHz_e = 4,
         Delay1ms_e = 5,
+        FilterEnable_e = 6,
         NUM_CONTROLS
     };
 
@@ -62,6 +69,7 @@ public:
     void hipass1hz(float value);
     void lopass1khz(float value);
     void delay1ms(float value);
+    void filterenable(float value);
 
     //!s - START_USER_PUBLIC_MEMBERS - put your public members below this line before the matching END
     //!e - END_USER_PUBLIC_MEMBERS
@@ -75,6 +83,7 @@ private:
     float m_hipass1hz = 0.0f;
     float m_lopass1khz = 0.0f;
     float m_delay1ms = 0.0f;
+    float m_filterenable = 0.0f;
 
     audio_block_t* m_basicInputCheck(audio_block_t* inputAudioBlock, unsigned outputChannel);
 
@@ -109,6 +118,9 @@ private:
 
     bool m_config(unsigned selectedIr);
     void m_impulse(const float32_t *coefs,float32_t *maskgen,int size);
+
+    bool m_filterEnable = true;
+    LowPassFilter_t m_lpf_L, m_lpf_R, m_hpf_L, m_hpf_R;
     //!e - END_USER_PRIVATE_MEMBERS
 
 };
