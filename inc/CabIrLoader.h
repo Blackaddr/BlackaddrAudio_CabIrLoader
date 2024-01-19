@@ -37,10 +37,9 @@ public:
         Bypass_e = 0,
         Volume_e = 1,
         CabSelect_e = 2,
-        HiPass1Hz_e = 3,
-        LoPass1KHz_e = 4,
-        Delay1ms_e = 5,
-        FilterEnable_e = 6,
+        LoPass1KHz_e = 3,
+        HiPass1Hz_e = 4,
+        FilterEnable_e = 5,
         NUM_CONTROLS
     };
 
@@ -66,9 +65,8 @@ public:
     // control value set functions, must take floats between 0.0f and 1.0f - do not change these declarations
     void volume(float value) override;
     void cabselect(float value);
-    void hipass1hz(float value);
     void lopass1khz(float value);
-    void delay1ms(float value);
+    void hipass1hz(float value);
     void filterenable(float value);
 
     //!s - START_USER_PUBLIC_MEMBERS - put your public members below this line before the matching END
@@ -80,9 +78,8 @@ private:
 
     // m_bypass and m_volume are already provided by the base class AudioEffectWrapper
     float m_cabselect = 0.0f;
-    float m_hipass1hz = 0.0f;
     float m_lopass1khz = 0.0f;
-    float m_delay1ms = 0.0f;
+    float m_hipass1hz = 0.0f;
     float m_filterenable = 0.0f;
 
     audio_block_t* m_basicInputCheck(audio_block_t* inputAudioBlock, unsigned outputChannel);

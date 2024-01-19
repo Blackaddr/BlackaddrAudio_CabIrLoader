@@ -45,7 +45,7 @@ static void updateFilterFreq(FilterType filterType, LowPassFilter_t* filter, flo
 }
 
 static void initializeFilter(FilterType filterType, LowPassFilter_t *filter, float cutoffFrequency) {
-    filter->yPrev = 0.0f;
+	filter->yPrev = 0.0f;
 	filter->xPrev = 0.0f;
 	updateFilterFreq(filterType, filter, cutoffFrequency);
 }
@@ -68,6 +68,17 @@ static float applyFilter(FilterType filterType, LowPassFilter_t *filter, float i
 	}
 	}
 }
+#if 0
+static std::vector<float> generateHannWindow(int windowSize) {
+    std::vector<float> hannWindow(windowSize);
+
+    for (int i = 0; i < windowSize; ++i) {
+        hannWindow[i] = 0.5 * (1 - std::cos(2 * M_PI * i / (windowSize - 1)));
+    }
+
+    return hannWindow;
+}
+#endif
 
 static bool isCabIndexValid(int idx)
 {
@@ -365,11 +376,6 @@ void CabIrLoader::lopass1khz(float value)
 	updateFilterFreq(FilterType::LOW_PASS, &m_lpf_R, 1000.0f * m_lopass1khz);
 }
 
-void CabIrLoader::delay1ms(float value)
-{
-
-}
-
 void CabIrLoader::filterenable(float value)
 {
 	m_filterenable = value;
@@ -416,6 +422,7 @@ void CabIrLoader::m_impulse(const float32_t *coefs,float32_t *maskgen,int size)
 	m_impulseLoaded = true;
 }
 
+#if defined(DEBUG_CAB_IR_PRINT)
 static void debugPrintIrCabs()
 {
 	EFX_PRINT(Serial.printf("\nCabIrLoader::debugPrintIrCabs():\n\r"));
@@ -426,5 +433,6 @@ static void debugPrintIrCabs()
 		EFX_PRINT(Serial.printf("-- Name:%s  Size:%u\n\r", IMPULSE_RESPONSE_NAME_PTRS[idx], IR_SAMPLE_SIZES[idx]));
 	}
 }
+#endif
 
 }
