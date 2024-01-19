@@ -37,7 +37,7 @@ static void updateFilterFreq(FilterType filterType, LowPassFilter_t* filter, flo
 	float ratio        = cutoffFrequency / AUDIO_SAMPLE_RATE_HZ;
     float ratioRadians = TWO_PI_F * ratio;
 	switch(filterType) {
-	case FilterType::HIGH_PASS : filter->alpha = 1.0f / (ratioRadians + 1.0f); break;
+	case FilterType::HIGH_PASS : filter->alpha = (1.0f / (ratioRadians + 1.0f)); break;
 	case FilterType::LOW_PASS  :
 	default                    :
 	    filter->alpha = ratioRadians / (ratioRadians + 1.0f);
@@ -68,6 +68,7 @@ static float applyFilter(FilterType filterType, LowPassFilter_t *filter, float i
 	}
 	}
 }
+
 #if 0
 static std::vector<float> generateHannWindow(int windowSize) {
     std::vector<float> hannWindow(windowSize);
@@ -367,6 +368,7 @@ void CabIrLoader::hipass1hz(float value)
 	m_hipass1hz = getUserParamValue(HiPass1Hz_e, value);
 	updateFilterFreq(FilterType::HIGH_PASS, &m_hpf_L, m_hipass1hz);
 	updateFilterFreq(FilterType::HIGH_PASS, &m_hpf_R, m_hipass1hz);
+	EFX_PRINT(Serial.printf("CabIrLoader::hipass1hz(): lowpass alpha is %f\n\r", m_hpf_L.alpha));
 }
 
 void CabIrLoader::lopass1khz(float value)

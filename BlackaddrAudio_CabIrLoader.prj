@@ -6,7 +6,7 @@
   "coreVersion": "1.3.1",
   "effectShortName": "CAB-IR",
   "effectCategory": "Unspecified",
-  "effectDescription": "",
+  "effectDescription": "A guitar cab IR loader with optional lowpass and highpass shelving filters to tweak the sound.",
   "numInputs": 2,
   "numOutputs": 2,
   "numControls": 6,
@@ -67,7 +67,7 @@
         5,
         0.0,
         31.0,
-        1.0,
+        0.0,
         1.0
       ],
       "iconIrSelect": "gfx/irSelect_custom.png",
@@ -82,7 +82,7 @@
     {
       "name": "Lo Pass 1 (KHz)",
       "shortName": "LP1",
-      "description": "Low-pass shelving filter to remove any high frequency harshness.",
+      "description": "Low-pass shelving filter to remove any high frequency harshness. Keep at max for no effect.",
       "config": [
         3,
         1.0,
@@ -102,7 +102,7 @@
     {
       "name": "Hi Pass 1(Hz)",
       "shortName": "HP1",
-      "description": "Hi-pass shelving filter to remove any excess bass muddiness if it's too boomy.",
+      "description": "Hi-pass shelving filter to remove any excess bass muddiness if it's too boomy. Keep at min value for no effect.",
       "config": [
         3,
         20.0,
@@ -127,7 +127,7 @@
         0,
         0.0,
         1.0,
-        1.0,
+        0.0,
         1.0
       ],
       "iconOn": "gfx/Toggle_Up_green.png",
