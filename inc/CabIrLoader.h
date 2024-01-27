@@ -91,7 +91,6 @@ private:
 
     static constexpr size_t MAX_IR_PARTITIONS = 8;
     float32_t fmask[MAX_IR_PARTITIONS][512]; // Effect is 10% faster with fmask on stack instead of heap
-    //float* fmask = nullptr;
 
     float32_t fftin[512];
 
