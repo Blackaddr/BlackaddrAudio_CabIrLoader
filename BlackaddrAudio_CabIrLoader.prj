@@ -1,9 +1,9 @@
 {
-  "efxFileVersion": "1.3.0",
+  "efxFileVersion": "1.4.0",
   "company": "Blackaddr Audio",
   "effectName": "Cab IR Loader",
   "effectVersion": "1.0.0",
-  "coreVersion": "1.3.1",
+  "coreVersion": "1.5.0",
   "effectShortName": "CAB-IR",
   "effectCategory": "Unspecified",
   "effectDescription": "A guitar cab IR loader with optional lowpass and highpass shelving filters to tweak the sound.",
@@ -157,6 +157,9 @@
   "settings": {
     "showModules": false,
     "isSingleton": false,
-    "cppDefines": ""
+    "cppDefines": "",
+    "noWarnings": "",
+    "enableFastMath": false,
+    "enableO3": false
   }
 }
