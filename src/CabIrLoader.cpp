@@ -37,6 +37,14 @@ enum class FilterType : unsigned {
 static void updateFilterFreq(FilterType filterType, LowPassFilter_t* filter, float cutoffFrequency)
 {
 	float ratio        = cutoffFrequency / AUDIO_SAMPLE_RATE_HZ;
+	if ( (ratio < 0.0) || (ratio > 0.5f) ) {
+		switch(filterType) {
+		case FilterType::HIGH_PASS : ratio = 0.0f;
+		case FilterType::LOW_PASS  :
+		default                    : ratio = 0.5f;
+
+		}
+	}
     float ratioRadians = TWO_PI_F * ratio;
 	switch(filterType) {
 	case FilterType::HIGH_PASS : filter->alpha = (1.0f / (ratioRadians + 1.0f)); break;
@@ -119,11 +127,6 @@ CabIrLoader::CabIrLoader()
 
 	fftout = (float*)malloc(MAX_IR_PARTITIONS * 512 * sizeof(float));
 	maskgen = (float*)malloc(m_fftLength * 2 * sizeof(float));
-
-	initializeFilter(FilterType::LOW_PASS,  &m_lpf_L, 16000.0f);
-	initializeFilter(FilterType::HIGH_PASS, &m_hpf_L, 20.0f);
-	initializeFilter(FilterType::LOW_PASS,  &m_lpf_R, 16000.0f);
-	initializeFilter(FilterType::HIGH_PASS, &m_hpf_R, 20.0f);
 }
 
 CabIrLoader::~CabIrLoader()
@@ -141,6 +144,11 @@ bool CabIrLoader::m_config(unsigned selectedIr)
 #if defined(DEBUG_CAB_IR_PRINT)
 	debugPrintIrCabs();
 #endif
+
+	initializeFilter(FilterType::LOW_PASS,  &m_lpf_L, 16000.0f);
+	initializeFilter(FilterType::HIGH_PASS, &m_hpf_L, 20.0f);
+	initializeFilter(FilterType::LOW_PASS,  &m_lpf_R, 16000.0f);
+	initializeFilter(FilterType::HIGH_PASS, &m_hpf_R, 20.0f);
 
     m_configComplete = false;
 	size_t impulseSizeSamples = getCabNumSamples(selectedIr);
